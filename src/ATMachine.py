@@ -11,26 +11,23 @@ cash do Saque: R$ 80,00 – Resultado Esperado: Entregar 1 nota de R$50,00 1 not
 """
 
 
-class ATMachine:
+def withdraw(cash):
+    available_bills = [100, 50, 20, 10]
+    bills = [0, 0, 0, 0]
 
-    @staticmethod
-    def withdraw(cash):
-        available_bills = [100, 50, 20, 10]
-        bills = [0, 0, 0, 0]
+    print("withdraw amount: {amount}".format(amount=cash))
 
-        print("withdraw amount: {amount}".format(amount=cash))
+    i = 0
+    while cash > 0 and i < len(available_bills):
+        if cash >= available_bills[i]:
+            cash -= available_bills[i]
+            bills[i] += 1
+        else:
+            i += 1
 
-        i = 0
-        while cash > 0 and i < len(available_bills):
-            if cash >= available_bills[i]:
-                cash -= available_bills[i]
-                bills[i] += 1
-            else:
-                i += 1
+    for i, bill in enumerate(bills):
+        print("{number} bills of {value}".format(number=bill, value=available_bills[i]))
 
-        for i, bill in enumerate(bills):
-            print("{number} bills of {value}".format(number=bill, value=available_bills[i]))
+    print("remaining cash: {cash}".format(cash=cash))
 
-        print("remaining cash: {cash}".format(cash=cash))
-
-        return bills
+    return bills
